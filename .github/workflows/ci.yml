@@ -1,4 +1,4 @@
-name: NOVI Demo CI/CD
+name: NOVI CI/CD
 
 on:
   push:
