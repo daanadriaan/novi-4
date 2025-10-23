@@ -3,6 +3,8 @@ name: NOVI Demo CI/CD
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
@@ -19,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run linter
+        run: npm run lint
+
       - name: Run tests
         run: npm test
 
@@ -26,7 +31,10 @@ jobs:
   push-to-dockerhub:
     # Deze job 'heeft nodig' (wacht op) de vorige job
     needs: build-and-test
-    runs-on: ubuntu-latest
+    # Alleen als we een push naar de main branch hebben
+    if: github.event_name == 'push'
+
+    runs-on: ubuntu-latest]
 
     steps:
       - name: Checkout code
