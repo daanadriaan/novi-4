@@ -1,36 +1,49 @@
-name: NOVI Demo CI
+name: NOVI Demo CI/CD
 
-# Trigger: de workflow draait bij elke push naar de 'main' branch
 on:
   push:
     branches: [ "main" ]
 
-# Jobs: wat moet er gebeuren?
 jobs:
-  build:
-    # Op welk type machine moet dit draaien?
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      # Stap 1: Code 'uitchecken' [cite: 54]
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Stap 2: Node.js installeren
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22'
 
-      # Stap 3: Dependencies installeren [cite: 54]
       - name: Install dependencies
         run: npm install
 
-      # Stap 4: Draai de tests!
       - name: Run tests
-        run: npm test # Dit commando draait Jest
+        run: npm test
 
-      # Stap 5: De 'build' stap (voor nu doen we net alsof) [cite: 54]
-      # We voegen later een 'lint' of 'test' script toe
-      - name: Build application
-        run: echo "Applicatie gebouwd!"
+  # NIEUWE JOB: Alleen als build-and-test slaagt
+  push-to-dockerhub:
+    # Deze job 'heeft nodig' (wacht op) de vorige job
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Stap 1: Login bij Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Stap 2: Bouw en push de Docker image
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: . # Zoek de Dockerfile hier
+          push: true # Push 'm ook echt
+          # Geef de image een naam
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/novi-demo-app:latest
