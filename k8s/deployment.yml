@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: novi-app-deployment
 spec:
-  replicas: 2
+  replicas: 2 # We willen 2 'Pods' (kopieën) van onze app
   selector:
     matchLabels:
       app: novi-app
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: novi-web
+          # Gebruik de image die we in Les 6 hebben gepusht!
           image: daanadriaan/novi-demo-app:latest
-          imagePullPolicy: Always # Zegt K8s: altijd de nieuwste van Docker Hub halen
           ports:
             - containerPort: 3000
