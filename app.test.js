@@ -2,7 +2,9 @@ test('1 + 1 moet 2 zijn', () => {
     expect(1 + 1).toBe(2);
 });
 
+/* eslint-disable */
 // Een test die expres faalt (om te demo-en)
-test('Dit faalt expres', () => {
-  expect(true).toBe(false);
-});
+// test('Dit faalt expres', () => {
+//   expect(true).toBe(false);
+// });
+/* eslint-enable */
