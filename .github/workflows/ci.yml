@@ -22,7 +22,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-  # NIEUWE JOB: Alleen als build-and-test slaagt
+  # Alleen als build-and-test slaagt
   push-to-dockerhub:
     # Deze job 'heeft nodig' (wacht op) de vorige job
     needs: build-and-test
