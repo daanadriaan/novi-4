@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  # De web-app
+  web:
+    build: . # Bouw de image o.b.v. de Dockerfile in deze map
+    ports:
+      - "3000:3000" # Koppel poort 3000 van je Mac aan poort 3000 in de container
+    environment:
+      # Environment variables kun je hier meegeven
+      NODE_ENV: development
+
+  # De database
+  redis-server:
+    image: "redis:alpine" # Gebruik een officiële Redis image
+    # We hoeven geen poort te mappen, alleen de 'web' service hoeft erbij te kunnen
