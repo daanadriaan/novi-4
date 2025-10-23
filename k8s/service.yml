@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: novi-app-service
+spec:
+  type: NodePort # Maakt de service toegankelijk buiten het cluster
+  selector:
+    app: novi-app
+  ports:
+    - protocol: TCP
+      port: 80       # De interne poort van de service
+      targetPort: 3000 # De poort van onze container (app.js)

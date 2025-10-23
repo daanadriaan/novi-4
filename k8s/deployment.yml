@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: novi-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: novi-app
+  template:
+    metadata:
+      labels:
+        app: novi-app
+    spec:
+      containers:
+        - name: novi-web
+          image: daanadriaan/novi-demo-app:latest
+          imagePullPolicy: Always # Zegt K8s: altijd de nieuwste van Docker Hub halen
+          ports:
+            - containerPort: 3000

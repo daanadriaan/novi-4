@@ -9,3 +9,9 @@
 # Stoppen
 - `docker down`
 
+# Kubernetes
+- Aanmaken `kubectl apply -f k8s/`
+- `kubectl get pods`
+- `kubectl get services`
+- `kubectl get deployments`
+- `kubectl rollout restart deployment novi-app-deployment`

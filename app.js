@@ -4,6 +4,9 @@ const redis = require('redis');
 const app = express();
 const port = 3000;
 
+/*
+// ---- Voor Les 9 kun je dit later weer aanzetten ---
+
 // Maak verbinding met de Redis-database
 // 'redis-server' is de naam van de service in docker-compose!
 const client = redis.createClient({
@@ -23,6 +26,13 @@ app.get('/', async (req, res) => {
     await client.set('bezoekers', bezoekers);
 
     res.send(`Hallo NOVI! Deze pagina is ${bezoekers} keer bezocht.`);
+});
+
+--------------------------------------------
+ */
+
+app.get('/', (req, res) => {
+    res.send('Hallo NOVI!');
 });
 
 app.listen(port, () => {
