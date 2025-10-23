@@ -26,7 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Stap 4: De 'build' stap (voor nu doen we net alsof) [cite: 54]
+      # Stap 4: Draai de tests!
+      - name: Run tests
+        run: npm test # Dit commando draait Jest
+
+      # Stap 5: De 'build' stap (voor nu doen we net alsof) [cite: 54]
       # We voegen later een 'lint' of 'test' script toe
       - name: Build application
         run: echo "Applicatie gebouwd!"
