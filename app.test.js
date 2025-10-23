@@ -3,6 +3,6 @@ test('1 + 1 moet 2 zijn', () => {
 });
 
 // Een test die expres faalt (om te demo-en)
-// test('Dit faalt expres', () => {
-//   expect(true).toBe(false);
-// });
+test('Dit faalt expres', () => {
+  expect(true).toBe(false);
+});
