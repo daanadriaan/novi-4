@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Demo app voor DevOps",
   "main": "app.js",
+  "test": "jest",
   "scripts": {
     "start": "node app.js"
   },
